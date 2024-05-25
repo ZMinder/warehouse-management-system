@@ -18,7 +18,7 @@ mybatis:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
   #    ??????
-  type-aliases-package: com.zminder.wms.mappers
+  type-aliases-package: com.zminder.wms.pojo
   #  XxxMapper.xml??????
   mapper-locations: classpath:mapper/*.xml
 pagehelper:
