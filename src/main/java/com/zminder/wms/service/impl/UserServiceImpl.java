@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public Page<User> queryPage(int pageSize, int pageNum) {
         PageHelper.startPage(pageNum, pageSize);//开启分页拦截器
-        List<User> users = userMapper.queryAll();//执行查询操作
+        List<User> users = userMapper.selectAll();//执行查询操作
         //为了获取实际获取的分页信息，要new PageInfo() 因为users实际返回之前对数据进行了封装
         //实际返回的是List的子类
         PageInfo<User> userPageInfo = new PageInfo<>(users);
@@ -34,20 +34,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User queryById(int id) {
-        User user = userMapper.queryById(id);
+    public User queryByUsername(String username) {
+        User user = userMapper.selectByUsername(username);
         return user;
     }
 
     @Override
-    public int insert(User user) {
+    public int saveUser(User user) {
         int res = userMapper.insert(user);
         return res;
     }
 
     @Override
-    public int update(User user) {
+    public int modify(User user) {
         int res = userMapper.update(user);
+        return res;
+    }
+
+    @Override
+    public int removeByUsername(String username) {
+        int res = userMapper.deleteByUsername(username);
         return res;
     }
 }

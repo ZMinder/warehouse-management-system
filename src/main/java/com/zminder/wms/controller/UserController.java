@@ -22,9 +22,9 @@ public class UserController {
     }
 
     //根据id查询
-    @GetMapping("/{id}")
-    public Result<User> queryById(@PathVariable("id") int id) {
-        User user = userService.queryById(id);
+    @GetMapping("/{username}")
+    public Result<User> queryByUsername(@PathVariable("username") String username) {
+        User user = userService.queryByUsername(username);
         if (null == user) {//如果查询不到
             return Result.error(ResultCode.USER_NOT_EXISTS, user);
         }
@@ -34,7 +34,7 @@ public class UserController {
     //新增用户
     @PostMapping
     public Result<Integer> saveUser(@RequestBody User user) {
-        int res = userService.insert(user);
+        int res = userService.saveUser(user);
         if (res == 0) {//新增失败
             return Result.fail(res);
         }
@@ -44,8 +44,18 @@ public class UserController {
     //更新用户信息
     @PutMapping
     public Result<Integer> modifyUser(@RequestBody User user) {
-        int res = userService.update(user);
+        int res = userService.modify(user);
         if (res == 0) {//当前数据库不存在该用户
+            return Result.error(ResultCode.USER_NOT_EXISTS, res);
+        }
+        return Result.success(res);
+    }
+
+    //根据id删除用户
+    @DeleteMapping("/{username}")
+    public Result<Integer> removeUser(@PathVariable("username") String username) {
+        int res = userService.removeByUsername(username);
+        if (res == 0) {//用户不存在
             return Result.error(ResultCode.USER_NOT_EXISTS, res);
         }
         return Result.success(res);

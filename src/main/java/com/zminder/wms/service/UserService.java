@@ -7,9 +7,11 @@ public interface UserService {
 
     Page<User> queryPage(int pageSize, int pageNum);
 
-    User queryById(int id);
+    User queryByUsername(String username);
 
-    int insert(User user);
+    int saveUser(User user);
 
-    int update(User user);
+    int modify(User user);
+
+    int removeByUsername(String username);
 }
