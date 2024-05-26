@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface UserMapper {
     List<User> queryAll();
+
+    User queryById(int id);
+
+    int insert(User user);
 }

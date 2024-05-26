@@ -32,4 +32,16 @@ public class UserServiceImpl implements UserService {
         int realPageSize = userList.size();//获取当前页的实际条数
         return new Page<>(realPageSize, realPageNum, userList);
     }
+
+    @Override
+    public User queryById(int id) {
+        User user = userMapper.queryById(id);
+        return user;
+    }
+
+    @Override
+    public int insert(User user) {
+        int res = userMapper.insert(user);
+        return res;
+    }
 }
