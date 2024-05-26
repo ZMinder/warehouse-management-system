@@ -63,4 +63,10 @@
         from user
         where username = #{username}
     </delete>
+
+    <!--    模糊查询-->
+    <select id="fuzzySelect" resultMap="baseMap">
+        <include refid="baseSelect"></include>
+        where username like concat('%',#{keywords},'%')
+    </select>
 </mapper>

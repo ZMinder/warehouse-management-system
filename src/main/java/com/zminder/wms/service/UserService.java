@@ -14,4 +14,6 @@ public interface UserService {
     int modify(User user);
 
     int removeByUsername(String username);
+
+    Page<User> fuzzyQuery(int pageSize,int pageNum,String keywords);
 }

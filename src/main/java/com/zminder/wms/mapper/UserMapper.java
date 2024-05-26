@@ -14,4 +14,6 @@ public interface UserMapper {
     int update(User user);
 
     int deleteByUsername(String username);
+
+    List<User> fuzzySelect(String keywords);
 }

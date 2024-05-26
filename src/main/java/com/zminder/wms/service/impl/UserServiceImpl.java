@@ -20,6 +20,17 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    public Page<User> fuzzyQuery(int pageSize, int pageNum, String keywords) {
+        PageHelper.startPage(pageNum, pageSize);//开启分页拦截器
+        List<User> users = userMapper.fuzzySelect(keywords);
+        PageInfo<User> pageInfo = new PageInfo<>(users);
+        List<User> userList = pageInfo.getList();//实际查询的用户集合
+        int realPageSize = userList.size();
+        int realPageNum = pageInfo.getPageNum();
+        return new Page<>(realPageSize, realPageNum, userList);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Page<User> queryPage(int pageSize, int pageNum) {
         PageHelper.startPage(pageNum, pageSize);//开启分页拦截器

@@ -60,4 +60,13 @@ public class UserController {
         }
         return Result.success(res);
     }
+
+    //模糊查询
+    @GetMapping("/fuzzy")
+    public Result<Page<User>> fuzzyQuery(@RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize,
+                                         @RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
+                                         @RequestParam(value = "keywords", required = false) String keywords) {
+        Page<User> page = userService.fuzzyQuery(pageSize, pageNum, keywords);
+        return Result.success(page);
+    }
 }
