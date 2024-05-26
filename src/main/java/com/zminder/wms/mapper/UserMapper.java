@@ -10,4 +10,6 @@ public interface UserMapper {
     User queryById(int id);
 
     int insert(User user);
+
+    int update(User user);
 }

@@ -5,6 +5,7 @@
         select *
         from user
     </sql>
+
     <!--    查询user表所有用户的映射map-->
     <resultMap id="baseMap" type="User">
         <id column="id" property="id"/>
@@ -17,15 +18,18 @@
         <result column="role_id" property="roleId"/>
         <result column="is_valid" property="isValid"/>
     </resultMap>
+
     <!--查询所有-->
     <select id="queryAll" resultMap="baseMap">
         <include refid="baseSelect"></include>
     </select>
+
     <!--    根据id查询-->
     <select id="queryById" resultMap="baseMap">
         <include refid="baseSelect"></include>
         where id = #{id}
     </select>
+
     <!--新增用户-->
     <insert id="insert">
         insert into user(username,nickname,password,age,gender,phone
@@ -35,4 +39,21 @@
         <if test="roleId != null">,#{roleId}</if>
         <if test="isValid != null">,#{isValid}</if>)
     </insert>
+
+    <!--    更新用户信息-->
+    <update id="update">
+        update user
+        <set>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="roleId != null">role_id = #{roleId},</if>
+            <if test="isValid != null">is_valid = #{isValid},</if>
+            -- 兜底方案 防止set后空空如也 sql语句报错
+            <if test="id != null">id = #{id}</if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

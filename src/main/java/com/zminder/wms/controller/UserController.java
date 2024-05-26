@@ -35,8 +35,18 @@ public class UserController {
     @PostMapping
     public Result<Integer> saveUser(@RequestBody User user) {
         int res = userService.insert(user);
-        if (res == 0) {
+        if (res == 0) {//新增失败
             return Result.fail(res);
+        }
+        return Result.success(res);
+    }
+
+    //更新用户信息
+    @PutMapping
+    public Result<Integer> modifyUser(@RequestBody User user) {
+        int res = userService.update(user);
+        if (res == 0) {//当前数据库不存在该用户
+            return Result.error(ResultCode.USER_NOT_EXISTS, res);
         }
         return Result.success(res);
     }
