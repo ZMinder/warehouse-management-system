@@ -1,9 +1,9 @@
 package com.zminder.wms.service;
 
 import com.zminder.wms.pojo.User;
-
-import java.util.List;
+import com.zminder.wms.utils.Page;
 
 public interface UserService {
-    List<User> showAll();
+
+    Page<User> queryPage(int pageSize, int pageNum);
 }

@@ -6,7 +6,7 @@
         from user
     </sql>
     <!--    查询user表所有用户的映射map-->
-    <resultMap id="showAll" type="User">
+    <resultMap id="queryAll" type="User">
         <id column="id" property="id"/>
         <result column="username" property="username"/>
         <result column="nickname" property="nickname"/>
@@ -17,7 +17,8 @@
         <result column="role_id" property="roleId"/>
         <result column="is_valid" property="isValid"/>
     </resultMap>
-    <select id="showAll" resultMap="showAll">
+
+    <select id="queryAll" resultType="com.zminder.wms.pojo.User">
         <include refid="baseSelect"></include>
     </select>
 </mapper>
