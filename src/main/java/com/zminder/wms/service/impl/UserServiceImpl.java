@@ -47,9 +47,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User queryByUsername(String username) {
-        User user = userMapper.selectByUsername(username);
-        return user;
+    public Page<User> queryByGender(int pageSize, int pageNum, String gender) {
+        PageHelper.startPage(pageNum, pageSize);//开启分页拦截器
+        List<User> users = userMapper.selectByGender(gender);
+        PageInfo<User> pageInfo = new PageInfo<>(users);
+        List<User> userList = pageInfo.getList();//实际查询的用户集合
+        int realPageSize = userList.size();
+        int realPageNum = pageInfo.getPageNum();
+        long total = pageInfo.getTotal();
+        return new Page<>(realPageSize, realPageNum, total, userList);
     }
 
     @Override

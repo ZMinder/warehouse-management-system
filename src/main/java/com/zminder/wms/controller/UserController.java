@@ -17,19 +17,19 @@ public class UserController {
 
     //分页查询
     @GetMapping
-    public Result<Page<User>> queryPage(@RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize, @RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum) {
+    public Result<Page<User>> queryPage(@RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize,
+                                        @RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum) {
         Page<User> res = userService.queryPage(pageSize, pageNum);
         return Result.success(res);
     }
 
-    //根据id查询
-    @GetMapping("/{username}")
-    public Result<User> queryByUsername(@PathVariable("username") String username) {
-        User user = userService.queryByUsername(username);
-        if (null == user) {//如果查询不到
-            return Result.error(ResultCode.USER_NOT_EXISTS, user);
-        }
-        return Result.success(user);
+    //根据性别查询
+    @GetMapping("/gender")
+    public Result<Page<User>> queryByUsername(@RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize,
+                                              @RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
+                                              @RequestParam(value = "gender", required = false) String gender) {
+        Page<User> page = userService.queryByGender(pageSize, pageNum, gender);
+        return Result.success(page);
     }
 
     //新增用户
@@ -52,7 +52,7 @@ public class UserController {
         return Result.success(res);
     }
 
-    //根据id删除用户
+    //根据账号删除用户
     @DeleteMapping("/{username}")
     public Result<Integer> removeUser(@PathVariable("username") String username) {
         int res = userService.removeByUsername(username);

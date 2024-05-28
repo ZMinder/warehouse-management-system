@@ -25,9 +25,9 @@
     </select>
 
     <!--    根据账号查询-->
-    <select id="selectByUsername" resultMap="baseMap">
+    <select id="selectByGender" resultMap="baseMap">
         <include refid="baseSelect"></include>
-        where username = #{username}
+        where gender like concat('%',#{keywords},'%')
     </select>
 
     <!--新增用户-->
@@ -67,6 +67,6 @@
     <!--    模糊查询-->
     <select id="fuzzySelect" resultMap="baseMap">
         <include refid="baseSelect"></include>
-        where username like concat('%',#{keywords},'%')
+        where nickname like concat('%',#{keywords},'%')
     </select>
 </mapper>

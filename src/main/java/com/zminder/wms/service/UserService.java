@@ -7,7 +7,7 @@ public interface UserService {
 
     Page<User> queryPage(int pageSize, int pageNum);
 
-    User queryByUsername(String username);
+    Page<User> queryByGender(int pageSize, int pageNum,String gender);
 
     int saveUser(User user);
 
