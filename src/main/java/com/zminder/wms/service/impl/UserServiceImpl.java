@@ -27,7 +27,8 @@ public class UserServiceImpl implements UserService {
         List<User> userList = pageInfo.getList();//实际查询的用户集合
         int realPageSize = userList.size();
         int realPageNum = pageInfo.getPageNum();
-        return new Page<>(realPageSize, realPageNum, userList);
+        long total = pageInfo.getTotal();
+        return new Page<>(realPageSize, realPageNum, total, userList);
     }
 
     @Override
@@ -41,7 +42,8 @@ public class UserServiceImpl implements UserService {
         int realPageNum = userPageInfo.getPageNum();//获取当前页码
         List<User> userList = userPageInfo.getList();//获取当前页的记录列表
         int realPageSize = userList.size();//获取当前页的实际条数
-        return new Page<>(realPageSize, realPageNum, userList);
+        long total = userPageInfo.getTotal();//总记录数
+        return new Page<>(realPageSize, realPageNum, total, userList);
     }
 
     @Override

@@ -12,5 +12,6 @@ import java.util.List;
 public class Page<T> {
     private Integer pageSize;//每页实际返回的条数
     private Integer pageNum;//实际返回的页码
+    private Long total;//总记录数
     List<T> data;//存储的数据
 }
