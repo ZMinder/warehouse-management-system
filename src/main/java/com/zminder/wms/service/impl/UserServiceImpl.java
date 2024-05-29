@@ -46,6 +46,12 @@ public class UserServiceImpl implements UserService {
         return new Page<>(realPageSize, realPageNum, total, userList);
     }
 
+    @Override
+    public User queryByUsername(String username) {
+        User user = userMapper.selectByUsername(username);
+        return user;
+    }
+
 
     @Override
     public int saveUser(User user) {

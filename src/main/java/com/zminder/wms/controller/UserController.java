@@ -23,6 +23,15 @@ public class UserController {
         return Result.success(res);
     }
 
+    @GetMapping("/{username}")
+    public Result<User> queryByUsername(@PathVariable("username") String username) {
+        User user = userService.queryByUsername(username);
+        if (null == user) {
+            return Result.fail(null);
+        }
+        return Result.success(user);
+    }
+
     //新增用户
     @PostMapping
     public Result<Integer> saveUser(@RequestBody User user) {

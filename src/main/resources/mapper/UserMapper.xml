@@ -73,4 +73,8 @@
             </if>
         </where>
     </select>
+    <select id="selectByUsername" resultMap="baseMap">
+        <include refid="baseSelect"></include>
+        where username = #{username}
+    </select>
 </mapper>
