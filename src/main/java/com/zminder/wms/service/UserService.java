@@ -7,7 +7,6 @@ public interface UserService {
 
     Page<User> queryPage(int pageSize, int pageNum);
 
-    Page<User> queryByGender(int pageSize, int pageNum,String gender);
 
     int saveUser(User user);
 
@@ -15,5 +14,5 @@ public interface UserService {
 
     int removeByUsername(String username);
 
-    Page<User> fuzzyQuery(int pageSize,int pageNum,String keywords);
+    Page<User> fuzzyQuery(int pageSize, int pageNum, User fuzzy);
 }

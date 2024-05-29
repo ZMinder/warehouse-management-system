@@ -1,7 +1,7 @@
 spring:
   application:
     name: wms
-  #    ????????????????
+  #    druid数据库连接池
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -11,18 +11,21 @@ spring:
       password: "040712"
 server:
   port: 8090
-#      ??mybatis?????
+#      mybatis相关配置
 mybatis:
-  #  ??settings?????
+  #  替代settings
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
-  #    ??????
+  #    pojo别名
   type-aliases-package: com.zminder.wms.pojo
-  #  XxxMapper.xml??????
+  #  XxxMapper.xml所在位置
   mapper-locations: classpath:mapper/*.xml
 pagehelper:
-  helperDialect: mysql            # ???? MySQL ??????
-  reasonable: true                # ???????????
-  supportMethodsArguments: true   # ??????????????????
-  params: count=countSql          # ?????????????? SQL ??
+  helperDialect: mysql            # 指定环境为MySQL
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+logging:
+  level:
+    com.zminder.wms.mapper: debug

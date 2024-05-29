@@ -20,9 +20,9 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Page<User> fuzzyQuery(int pageSize, int pageNum, String keywords) {
+    public Page<User> fuzzyQuery(int pageSize, int pageNum, User fuzzy) {
         PageHelper.startPage(pageNum, pageSize);//开启分页拦截器
-        List<User> users = userMapper.fuzzySelect(keywords);
+        List<User> users = userMapper.fuzzySelect(fuzzy);
         PageInfo<User> pageInfo = new PageInfo<>(users);
         List<User> userList = pageInfo.getList();//实际查询的用户集合
         int realPageSize = userList.size();
@@ -46,17 +46,6 @@ public class UserServiceImpl implements UserService {
         return new Page<>(realPageSize, realPageNum, total, userList);
     }
 
-    @Override
-    public Page<User> queryByGender(int pageSize, int pageNum, String gender) {
-        PageHelper.startPage(pageNum, pageSize);//开启分页拦截器
-        List<User> users = userMapper.selectByGender(gender);
-        PageInfo<User> pageInfo = new PageInfo<>(users);
-        List<User> userList = pageInfo.getList();//实际查询的用户集合
-        int realPageSize = userList.size();
-        int realPageNum = pageInfo.getPageNum();
-        long total = pageInfo.getTotal();
-        return new Page<>(realPageSize, realPageNum, total, userList);
-    }
 
     @Override
     public int saveUser(User user) {

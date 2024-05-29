@@ -7,7 +7,6 @@ import java.util.List;
 public interface UserMapper {
     List<User> selectAll();
 
-    List<User> selectByGender(String gender);
 
     int insert(User user);
 
@@ -15,5 +14,5 @@ public interface UserMapper {
 
     int deleteByUsername(String username);
 
-    List<User> fuzzySelect(String keywords);
+    List<User> fuzzySelect(User fuzzy);
 }

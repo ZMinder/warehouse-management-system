@@ -24,12 +24,6 @@
         <include refid="baseSelect"></include>
     </select>
 
-    <!--    根据账号查询-->
-    <select id="selectByGender" resultMap="baseMap">
-        <include refid="baseSelect"></include>
-        where gender like concat('%',#{keywords},'%')
-    </select>
-
     <!--新增用户-->
     <insert id="insert">
         insert into user(username,nickname,password,age,gender,phone
@@ -67,6 +61,16 @@
     <!--    模糊查询-->
     <select id="fuzzySelect" resultMap="baseMap">
         <include refid="baseSelect"></include>
-        where nickname like concat('%',#{keywords},'%')
+        <where>
+            <if test="nickname != null">
+                nickname like concat('%',#{nickname},'%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="roleId != null">
+                and role_id = #{roleId}
+            </if>
+        </where>
     </select>
 </mapper>

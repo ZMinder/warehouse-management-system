@@ -23,15 +23,6 @@ public class UserController {
         return Result.success(res);
     }
 
-    //根据性别查询
-    @GetMapping("/gender")
-    public Result<Page<User>> queryByUsername(@RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize,
-                                              @RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
-                                              @RequestParam(value = "gender", required = false) String gender) {
-        Page<User> page = userService.queryByGender(pageSize, pageNum, gender);
-        return Result.success(page);
-    }
-
     //新增用户
     @PostMapping
     public Result<Integer> saveUser(@RequestBody User user) {
@@ -63,11 +54,12 @@ public class UserController {
     }
 
     //模糊查询
-    @GetMapping("/fuzzy")
+    @PostMapping("/fuzzy")
     public Result<Page<User>> fuzzyQuery(@RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize,
                                          @RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
-                                         @RequestParam(value = "keywords", required = false) String keywords) {
-        Page<User> page = userService.fuzzyQuery(pageSize, pageNum, keywords);
+                                         @RequestBody User fuzzy) {
+        System.out.println(fuzzy);
+        Page<User> page = userService.fuzzyQuery(pageSize, pageNum, fuzzy);
         return Result.success(page);
     }
 }
