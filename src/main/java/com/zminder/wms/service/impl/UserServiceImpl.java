@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -17,7 +18,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
-
 
     @Override
     public Page<User> fuzzyQuery(int pageSize, int pageNum, User fuzzy) {
@@ -29,6 +29,15 @@ public class UserServiceImpl implements UserService {
         int realPageNum = pageInfo.getPageNum();
         long total = pageInfo.getTotal();
         return new Page<>(realPageSize, realPageNum, total, userList);
+    }
+
+    @Override
+    public User login(String username, String password) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("username", username);
+        map.put("password", password);
+        User user = userMapper.selectByUsernameAndPassword(map);
+        return user;
     }
 
     @Override

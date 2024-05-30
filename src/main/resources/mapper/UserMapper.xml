@@ -77,4 +77,8 @@
         <include refid="baseSelect"></include>
         where username = #{username}
     </select>
+    <select id="selectByUsernameAndPassword" resultMap="baseMap">
+        <include refid="baseSelect"></include>
+        where username = #{username} and password = #{password}
+    </select>
 </mapper>

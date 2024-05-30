@@ -27,9 +27,19 @@ public class UserController {
     public Result<User> queryByUsername(@PathVariable("username") String username) {
         User user = userService.queryByUsername(username);
         if (null == user) {
-            return Result.fail(null);
+            return Result.error(ResultCode.USER_NOT_EXISTS, null);
         }
         return Result.success(user);
+    }
+
+    @PostMapping("/login")
+    public Result<User> login(@RequestBody User user) {
+        User res = userService.login(user.getUsername(), user.getPassword());
+        if (null == res) {
+            return Result.error(ResultCode.USER_NOT_EXISTS, null);
+        }
+        res.setPassword(null);
+        return Result.success(res);
     }
 
     //新增用户
