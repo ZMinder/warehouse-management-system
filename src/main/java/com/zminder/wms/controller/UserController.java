@@ -1,6 +1,8 @@
 package com.zminder.wms.controller;
 
+import com.zminder.wms.pojo.Menu;
 import com.zminder.wms.pojo.User;
+import com.zminder.wms.service.MenuService;
 import com.zminder.wms.service.UserService;
 import com.zminder.wms.utils.Page;
 import com.zminder.wms.utils.Result;
@@ -8,12 +10,18 @@ import com.zminder.wms.utils.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 @CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MenuService menuService;
 
     //分页查询
     @GetMapping
@@ -33,12 +41,16 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Result<User> login(@RequestBody User user) {
-        User res = userService.login(user.getUsername(), user.getPassword());
-        if (null == res) {
+    public Result<HashMap> login(@RequestBody User user) {
+        User queryUser = userService.login(user.getUsername(), user.getPassword());
+        if (null == queryUser) {
             return Result.error(ResultCode.USER_NOT_EXISTS, null);
         }
-        res.setPassword(null);
+        queryUser.setPassword(null);
+        List<Menu> menus = menuService.queryLowerRole(queryUser.getRoleId());
+        HashMap<String, Object> res = new HashMap<>();
+        res.put("user", queryUser);
+        res.put("menu", menus);
         return Result.success(res);
     }
 

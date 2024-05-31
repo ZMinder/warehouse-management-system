@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zminder.wms.mapper.MenuMapper">
+    <sql id="baseSql">
+        select *
+        from menu
+    </sql>
+    <resultMap id="baseMap" type="menu">
+        <id column="id" property="id"/>
+        <result column="menu_code" property="menuCode"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="menu_level" property="menuLevel"/>
+        <result column="menu_parent_code" property="menuParentCode"/>
+        <result column="menu_index" property="menuIndex"/>
+        <result column="menu_right" property="menuRight"/>
+        <result column="menu_icon" property="menuIcon"/>
+        <result column="menu_component" property="menuComponent"/>
+    </resultMap>
+    <select id="selectLowerRole" resultMap="baseMap">
+        <include refid="baseSql"></include>
+        <![CDATA[where menu_right >= #{roleId}]]>
+    </select>
+</mapper>
