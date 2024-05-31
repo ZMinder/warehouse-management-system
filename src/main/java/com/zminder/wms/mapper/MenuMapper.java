@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MenuMapper {
      List<Menu> selectLowerRole(int roleId);
+
+     List<Menu> selectAll();
 }

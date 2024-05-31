@@ -20,4 +20,7 @@
         <include refid="baseSql"></include>
         <![CDATA[where menu_right >= #{roleId}]]>
     </select>
+    <select id="selectAll" resultMap="baseMap">
+        <include refid="baseSql"></include>
+    </select>
 </mapper>

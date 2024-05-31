@@ -20,4 +20,9 @@ public class MenuServiceImpl implements MenuService {
     public List<Menu> queryLowerRole(int roleId) {
         return menuMapper.selectLowerRole(roleId);
     }
+
+    @Override
+    public List<Menu> queryAll() {
+        return menuMapper.selectAll();
+    }
 }

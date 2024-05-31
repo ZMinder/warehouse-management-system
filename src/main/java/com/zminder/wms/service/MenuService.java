@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MenuService {
     List<Menu> queryLowerRole(int roleId);
+
+    List<Menu> queryAll();
 }
