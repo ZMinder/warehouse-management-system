@@ -12,13 +12,9 @@
         <result column="storage_remark" property="storageRemark"/>
     </resultMap>
 
-    <select id="selectAll" resultMap="baseMap">
-        <include refid="baseSql"></include>
-    </select>
-
     <select id="selectByStorageName" resultMap="baseMap">
         <include refid="baseSql"></include>
-        where storage_name = #{storageName}
+        where storage_name like CONCAT('%',#{storageName},'%')
     </select>
 
     <insert id="insert">

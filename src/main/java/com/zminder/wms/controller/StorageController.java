@@ -17,18 +17,11 @@ public class StorageController {
 
     @GetMapping
     public Result<Page<Storage>> queryAll(@RequestParam(value = "pageSize",required = false,defaultValue = "10") int pageSize,
-                                          @RequestParam(value = "pageNum",required = false,defaultValue = "1") int pageNum) {
-        Page<Storage> storagePage = storageService.queryAll(pageSize, pageNum);
-        return Result.success(storagePage);
-    }
+                                          @RequestParam(value = "pageNum",required = false,defaultValue = "1") int pageNum,
+                                          @RequestParam(value = "storageName",required = false,defaultValue = "") String storageName) {
 
-    @GetMapping("/{storageName}")
-    public Result<Storage> queryByStorageName(@PathVariable("storageName") String storageName) {
-        Storage storage = storageService.queryByStorageName(storageName);
-        if (null == storage) {
-            return Result.error(ResultCode.STORAGE_NOT_EXISTS, null);
-        }
-        return Result.success(storage);
+        Page<Storage> storagePage = storageService.queryAll(pageSize, pageNum,storageName);
+        return Result.success(storagePage);
     }
 
     @PostMapping

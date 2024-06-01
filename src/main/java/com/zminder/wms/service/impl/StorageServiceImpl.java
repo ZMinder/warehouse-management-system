@@ -19,21 +19,18 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Storage> queryAll(int pageSize, int pageNum) {
+    public Page<Storage> queryAll(int pageSize, int pageNum,String storageName) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Storage> storages = storageMapper.selectAll();
+        List<Storage> storages = storageMapper.selectByStorageName(storageName);
         PageInfo<Storage> storagePageInfo = new PageInfo<>(storages);
         List<Storage> list = storagePageInfo.getList();
         int realPageSize = list.size();
+        System.out.println(realPageSize);
+        System.out.println(list);
+        System.out.println(storages);
         int realPageNum = storagePageInfo.getPageNum();
         long total = storagePageInfo.getTotal();
         return new Page<>(realPageSize, realPageNum, total, list);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Storage queryByStorageName(String storageName) {
-        return storageMapper.selectByStorageName(storageName);
     }
 
     @Override
