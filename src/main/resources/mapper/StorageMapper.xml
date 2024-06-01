@@ -24,7 +24,7 @@
     <insert id="insert">
         insert into storage(storage_name
         <if test="storageRemark != null">,storage_remark</if>)
-        values(storageName,
+        values(#{storageName}
         <if test="storageRemark != null">,#{storageRemark}</if>)
     </insert>
 

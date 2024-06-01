@@ -6,9 +6,7 @@ import com.zminder.wms.utils.Page;
 import com.zminder.wms.utils.Result;
 import com.zminder.wms.utils.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/storage")
@@ -17,12 +15,15 @@ public class StorageController {
     @Autowired
     private StorageService storageService;
 
-    public Result<Page<Storage>> queryAll(int pageSize, int pageNum) {
+    @GetMapping
+    public Result<Page<Storage>> queryAll(@RequestParam(value = "pageSize",required = false,defaultValue = "10") int pageSize,
+                                          @RequestParam(value = "pageNum",required = false,defaultValue = "1") int pageNum) {
         Page<Storage> storagePage = storageService.queryAll(pageSize, pageNum);
         return Result.success(storagePage);
     }
 
-    public Result<Storage> queryByStorageName(String storageName) {
+    @GetMapping("/{storageName}")
+    public Result<Storage> queryByStorageName(@PathVariable("storageName") String storageName) {
         Storage storage = storageService.queryByStorageName(storageName);
         if (null == storage) {
             return Result.error(ResultCode.STORAGE_NOT_EXISTS, null);
@@ -30,7 +31,8 @@ public class StorageController {
         return Result.success(storage);
     }
 
-    public Result<Integer> save(Storage storage) {
+    @PostMapping
+    public Result<Integer> save(@RequestBody Storage storage) {
         int save = storageService.save(storage);
         if (save == 0) {
             return Result.fail(null);
@@ -38,7 +40,8 @@ public class StorageController {
         return Result.success(save);
     }
 
-    public Result<Integer> removeByStorageName(String storageName) {
+    @DeleteMapping("/{storageName}")
+    public Result<Integer> removeByStorageName(@PathVariable("storageName") String storageName) {
         int res = storageService.removeByStorageName(storageName);
         if (res == 0) {
             return Result.fail(null);
@@ -46,7 +49,8 @@ public class StorageController {
         return Result.success(res);
     }
 
-    public Result<Integer> modify(Storage storage) {
+    @PutMapping
+    public Result<Integer> modify(@RequestBody Storage storage) {
         int modify = storageService.modify(storage);
         if (modify == 0) {
             return Result.fail(null);
