@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zminder.wms.mapper.StorageMapper">
+    <sql id="baseSql">
+        select *
+        from storage
+    </sql>
+
+    <resultMap id="baseMap" type="storage">
+        <id column="id" property="id"/>
+        <result column="storage_name" property="storageName"/>
+        <result column="storage_remark" property="storageRemark"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="baseMap">
+        <include refid="baseSql"></include>
+    </select>
+
+    <select id="selectByStorageName" resultMap="baseMap">
+        <include refid="baseSql"></include>
+        where storage_name = #{storageName}
+    </select>
+
+    <insert id="insert">
+        insert into storage(storage_name
+        <if test="storageRemark != null">,storage_remark</if>)
+        values(storageName,
+        <if test="storageRemark != null">,#{storageRemark}</if>)
+    </insert>
+
+    <delete id="deleteByStorageName">
+        delete
+        from storage
+        where storage_name = #{storageName}
+    </delete>
+
+    <update id="update">
+        update storage
+        <set>
+            <if test="id != null">id = #{id}</if>
+            <if test="storageName != null">,storage_name = #{storageName}</if>
+            <if test="storageRemark != null">,storage_remark = #{storageRemark}</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
