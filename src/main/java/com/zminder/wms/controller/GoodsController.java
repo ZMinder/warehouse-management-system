@@ -17,7 +17,7 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @GetMapping
+    @GetMapping("/list")
     public Result<List<Goods>> queryAll() {
         List<Goods> goods = goodsService.queryAll();
         if (null == goods) {
