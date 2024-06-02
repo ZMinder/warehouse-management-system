@@ -46,7 +46,7 @@ public class GoodsController {
     }
 
     @PostMapping
-    public Result<Integer> save(Goods goods) {
+    public Result<Integer> save(@RequestBody Goods goods) {
         int res = goodsService.save(goods);
         if (res == 0) {
             return Result.fail(null);
@@ -64,7 +64,7 @@ public class GoodsController {
     }
 
     @PutMapping
-    public Result<Integer> modify(Goods goods) {
+    public Result<Integer> modify(@RequestBody Goods goods) {
         int res = goodsService.modify(goods);
         if (res == 0) {
             return Result.fail(null);

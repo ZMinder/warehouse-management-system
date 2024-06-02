@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -40,7 +41,11 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     @Transactional(readOnly = true)
     public Goods queryByGoodsNameAndStorageAndType(String goodsName, Integer storageId, Integer typeId) {
-        return goodsMapper.selectByGoodsNameAndStorageAndType(goodsName, storageId, typeId);
+        HashMap<String ,Object> map = new HashMap<>();
+        map.put("goodsName",goodsName);
+        map.put("goodsStorage",storageId);
+        map.put("goodsType",typeId);
+        return goodsMapper.selectByGoodsNameAndStorageAndType(map);
     }
 
     @Override

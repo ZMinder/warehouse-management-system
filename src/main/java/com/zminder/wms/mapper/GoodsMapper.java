@@ -3,6 +3,7 @@ package com.zminder.wms.mapper;
 import com.zminder.wms.pojo.Goods;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 86176
@@ -16,7 +17,7 @@ public interface GoodsMapper {
 
     List<Goods> selectFuzzy(Goods goods);
 
-    Goods selectByGoodsNameAndStorageAndType(String goodsName, Integer storageId, Integer typeId);
+    Goods selectByGoodsNameAndStorageAndType(Map map);
 
     int deleteById(Integer id);
 
