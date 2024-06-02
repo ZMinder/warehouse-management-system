@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Storage implements Serializable {
+public class Storage {
 
     /**
      * 主键

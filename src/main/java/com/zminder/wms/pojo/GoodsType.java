@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GoodsType implements Serializable {
+public class GoodsType {
     private Integer id;
 
     private String goodsTypeName;
