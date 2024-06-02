@@ -5,7 +5,9 @@ import com.zminder.wms.pojo.Storage;
 import java.util.List;
 
 public interface StorageMapper {
-    List<Storage> selectByStorageName(String storageName);
+    List<Storage> selectFuzzyByStorageName(String storageName);
+
+    Storage selectByStorageName(String storageName);
 
     int insert(Storage storage);
 

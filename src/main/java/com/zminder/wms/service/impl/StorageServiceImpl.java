@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Service
 @Transactional
 public class StorageServiceImpl implements StorageService {
@@ -19,9 +20,9 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Storage> queryAll(int pageSize, int pageNum,String storageName) {
+    public Page<Storage> queryAll(int pageSize, int pageNum, String storageName) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Storage> storages = storageMapper.selectByStorageName(storageName);
+        List<Storage> storages = storageMapper.selectFuzzyByStorageName(storageName);
         PageInfo<Storage> storagePageInfo = new PageInfo<>(storages);
         List<Storage> list = storagePageInfo.getList();
         int realPageSize = list.size();
@@ -31,6 +32,12 @@ public class StorageServiceImpl implements StorageService {
         int realPageNum = storagePageInfo.getPageNum();
         long total = storagePageInfo.getTotal();
         return new Page<>(realPageSize, realPageNum, total, list);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Storage queryByStorageName(String storageName) {
+        return storageMapper.selectByStorageName(storageName);
     }
 
     @Override
