@@ -24,7 +24,7 @@
         from goods
     </sql>
 
-    <select id="selectALL" resultMap="baseMap">
+    <select id="selectAll" resultMap="baseMap">
         <include refid="baseSql"></include>
     </select>
 

@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public interface GoodsMapper {
 
-    List<Goods> selectALL();
+    List<Goods> selectAll();
 
     List<Goods> selectFuzzy(Goods goods);
 

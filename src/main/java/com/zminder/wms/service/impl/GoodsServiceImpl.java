@@ -22,7 +22,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     @Transactional(readOnly = true)
     public List<Goods> queryAll() {
-        return goodsMapper.selectALL();
+        return goodsMapper.selectAll();
     }
 
     @Override
