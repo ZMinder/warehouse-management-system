@@ -1,11 +1,11 @@
 package com.zminder.wms.mapper;
 
-import com.zminder.wms.pojo.Record;
+import com.zminder.wms.pojo.RecordAlias;
 
 import java.util.List;
 
 public interface RecordMapper {
-    List<Record> selectAll();
+    List<RecordAlias> selectAll();
 
-    List<Record> selectFuzzy(Record record);
+    List<RecordAlias> selectFuzzy(RecordAlias recordAlias);
 }

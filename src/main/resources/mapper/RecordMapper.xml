@@ -12,13 +12,13 @@
                r.goods_count                                                 goods_count,
                r.operation_time                                              operation_time,
                r.record_remark                                               record_remark
-        from record r
+        from recordAlias r
                  join goods g on g.id = r.goods_id
                  join goods_type gt on gt.id = g.goods_type
                  join storage s on s.id = g.goods_storage
     </sql>
 
-    <resultMap id="baseMap" type="record">
+    <resultMap id="baseMap" type="recordAlias">
         <id column="record_id" property="recordId"/>
         <result column="goods_name" property="goodsName"/>
         <result column="storage_name" property="storageName"/>

@@ -1,6 +1,6 @@
 package com.zminder.wms.controller;
 
-import com.zminder.wms.pojo.Record;
+import com.zminder.wms.pojo.RecordAlias;
 import com.zminder.wms.service.RecordService;
 import com.zminder.wms.utils.Page;
 import com.zminder.wms.utils.Result;
@@ -17,16 +17,16 @@ public class RecordController {
     private RecordService recordService;
 
     @GetMapping
-    public Result<List<Record>> queryAll() {
-        List<Record> records = recordService.queryAll();
-        return Result.success(records);
+    public Result<List<RecordAlias>> queryAll() {
+        List<RecordAlias> recordAliases = recordService.queryAll();
+        return Result.success(recordAliases);
     }
 
     @PostMapping
-    public Result<Page<Record>> queryFuzzy(@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
-                                           @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
-                                           @RequestBody Record record) {
-        Page<Record> recordPage = recordService.queryFuzzy(pageSize, pageNum, record);
+    public Result<Page<RecordAlias>> queryFuzzy(@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+                                                @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                                                @RequestBody RecordAlias recordAlias) {
+        Page<RecordAlias> recordPage = recordService.queryFuzzy(pageSize, pageNum, recordAlias);
         return Result.success(recordPage);
     }
 }

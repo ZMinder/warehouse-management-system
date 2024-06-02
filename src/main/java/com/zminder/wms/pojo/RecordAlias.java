@@ -9,7 +9,7 @@ import java.sql.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Record {
+public class RecordAlias {
     private Integer recordId;
     private String goodsName;
     private String storageName;
