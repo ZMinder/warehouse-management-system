@@ -6,7 +6,8 @@ public enum ResultCode {
     USER_NOT_EXISTS(405, "User not exist"),
 
     STORAGE_NOT_EXISTS(406, "Storage not exists"),
-    GOODS_TYPE_NOT_EXISTS(406, "GoodsType not exists");
+    GOODS_TYPE_NOT_EXISTS(406, "GoodsType not exists"),
+    GOODS_NOT_EXISTS(406, "Goods not exists");
 
     private final int code;
     private final String message;
