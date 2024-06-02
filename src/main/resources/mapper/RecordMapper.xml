@@ -38,10 +38,10 @@
     <select id="selectFuzzy" resultMap="baseMap">
         <include refid="baseSql"></include>
         <where>
-            <if test="goodsName != null">goods_name like CONCAT('%',#{goodsName},'%')</if>
-            <if test="storageName != null">and storage_name = #{storageName}</if>
-            <if test="goodsTypeName != null">and goods_type_name = #{goodsTypeName}</if>
-            <if test="recordType != null">and record_type = #{recordType}</if>
+            <if test="goodsName != null">g.goods_name like CONCAT('%',#{goodsName},'%')</if>
+            <if test="storageName != null">and s.storage_name = #{storageName}</if>
+            <if test="goodsTypeName != null">and gt.goods_type_name = #{goodsTypeName}</if>
+            <if test="recordType != null">and r.record_type = #{recordType}</if>
         </where>
     </select>
 </mapper>
