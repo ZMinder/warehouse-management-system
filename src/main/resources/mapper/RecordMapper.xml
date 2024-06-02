@@ -12,7 +12,7 @@
                r.goods_count                                                 goods_count,
                r.operation_time                                              operation_time,
                r.record_remark                                               record_remark
-        from recordAlias r
+        from record r
                  join goods g on g.id = r.goods_id
                  join goods_type gt on gt.id = g.goods_type
                  join storage s on s.id = g.goods_storage
