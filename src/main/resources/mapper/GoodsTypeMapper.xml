@@ -27,8 +27,8 @@
 
     <insert id="insert">
         insert into goods_type(goods_type_name
-        <if test="goodsTypeRemark != null">,goods_type_emark</if>)
-        values(#{storageName}
+        <if test="goodsTypeRemark != null">,goods_type_remark</if>)
+        values(#{goodsTypeName}
         <if test="goodsTypeRemark != null">,#{goodsTypeRemark}</if>)
     </insert>
 
@@ -39,7 +39,7 @@
     </delete>
 
     <update id="update">
-        update storage
+        update goods_type
         <set>
             <if test="id != null">id = #{id}</if>
             <if test="goodsTypeName != null">,goods_type_name = #{goodsTypeName}</if>
