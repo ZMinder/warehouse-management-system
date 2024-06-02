@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/storage")
+@RequestMapping("/goodsType")
 @CrossOrigin
 public class GoodsTypeController {
     @Autowired
