@@ -26,9 +26,6 @@ public class StorageServiceImpl implements StorageService {
         PageInfo<Storage> storagePageInfo = new PageInfo<>(storages);
         List<Storage> list = storagePageInfo.getList();
         int realPageSize = list.size();
-        System.out.println(realPageSize);
-        System.out.println(list);
-        System.out.println(storages);
         int realPageNum = storagePageInfo.getPageNum();
         long total = storagePageInfo.getTotal();
         return new Page<>(realPageSize, realPageNum, total, list);

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zminder.wms.mapper.GoodsTypeMapper">
+
+    <resultMap id="baseMap" type="GoodsType">
+        <id property="id" column="id"/>
+        <result property="goodsTypeName" column="goods_type_name"/>
+        <result property="goodsTypeRemark" column="goods_type_remark"/>
+    </resultMap>
+
+    <sql id="baseSql">
+        select id, goods_type_name, goods_type_remark
+        from goods_type
+    </sql>
+
+    <select id="selectFuzzyByGoodsTypeName" resultMap="baseMap">
+        <include refid="baseSql"></include>
+        where goods_type_name like CONCAT('%',#{goodsTypeName},'%')
+    </select>
+
+    <select id="selectByGoodsTypeName" resultMap="baseMap">
+        <include refid="baseSql"></include>
+        where goods_type_name = #{goodsTypeName}
+    </select>
+
+    <insert id="insert">
+        insert into goods_type(goods_type_name
+        <if test="goodsTypeRemark != null">,goods_type_emark</if>)
+        values(#{storageName}
+        <if test="goodsTypeRemark != null">,#{goodsTypeRemark}</if>)
+    </insert>
+
+    <delete id="deleteByGoodsTypeName">
+        delete
+        from goods_type
+        where goods_type_name = #{goodsTypeName}
+    </delete>
+
+    <update id="update">
+        update storage
+        <set>
+            <if test="id != null">id = #{id}</if>
+            <if test="goodsTypeName != null">,goods_type_name = #{goodsTypeName}</if>
+            <if test="goodsTypeRemark != null">,goods_type_remark = #{goodsTypeRemark}</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
