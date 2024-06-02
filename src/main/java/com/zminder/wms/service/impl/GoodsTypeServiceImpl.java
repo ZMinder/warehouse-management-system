@@ -19,7 +19,7 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
     private GoodsTypeMapper goodsTypeMapper;
 
     @Override
-    public Page<GoodsType> queryAll(int pageSize, int pageNum, String goodsTypeName) {
+    public Page<GoodsType> queryByPage(int pageSize, int pageNum, String goodsTypeName) {
         PageHelper.startPage(pageNum, pageSize);
         List<GoodsType> storages = goodsTypeMapper.selectFuzzyByGoodsTypeName(goodsTypeName);
         PageInfo<GoodsType> storagePageInfo = new PageInfo<>(storages);
@@ -48,5 +48,10 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
     @Override
     public int modify(GoodsType goodsType) {
         return goodsTypeMapper.update(goodsType);
+    }
+
+    @Override
+    public List<GoodsType> queryAll() {
+        return goodsTypeMapper.selectALL();
     }
 }

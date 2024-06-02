@@ -14,4 +14,6 @@ public interface StorageMapper {
     int deleteByStorageName(String storageName);
 
     int update(Storage storage);
+
+    List<Storage> selectAll();
 }

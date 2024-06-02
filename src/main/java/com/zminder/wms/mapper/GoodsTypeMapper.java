@@ -21,4 +21,6 @@ public interface GoodsTypeMapper {
     int deleteByGoodsTypeName(String goodsTypeName);
 
     int update(GoodsType goodsType);
+
+    List<GoodsType> selectALL();
 }

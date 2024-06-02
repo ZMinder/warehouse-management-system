@@ -25,6 +25,10 @@
         where goods_type_name = #{goodsTypeName}
     </select>
 
+    <select id="selectALL" resultMap="baseMap">
+        <include refid="baseSql"></include>
+    </select>
+
     <insert id="insert">
         insert into goods_type(goods_type_name
         <if test="goodsTypeRemark != null">,goods_type_remark</if>)

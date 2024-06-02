@@ -20,7 +20,7 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Storage> queryAll(int pageSize, int pageNum, String storageName) {
+    public Page<Storage> queryByPage(int pageSize, int pageNum, String storageName) {
         PageHelper.startPage(pageNum, pageSize);
         List<Storage> storages = storageMapper.selectFuzzyByStorageName(storageName);
         PageInfo<Storage> storagePageInfo = new PageInfo<>(storages);
@@ -50,5 +50,10 @@ public class StorageServiceImpl implements StorageService {
     @Override
     public int modify(Storage storage) {
         return storageMapper.update(storage);
+    }
+
+    @Override
+    public List<Storage> queryAll() {
+        return storageMapper.selectAll();
     }
 }

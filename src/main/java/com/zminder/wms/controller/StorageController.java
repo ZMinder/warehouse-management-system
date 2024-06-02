@@ -1,5 +1,6 @@
 package com.zminder.wms.controller;
 
+import com.zminder.wms.pojo.GoodsType;
 import com.zminder.wms.pojo.Storage;
 import com.zminder.wms.service.StorageService;
 import com.zminder.wms.utils.Page;
@@ -8,6 +9,8 @@ import com.zminder.wms.utils.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/storage")
 @CrossOrigin
@@ -15,10 +18,19 @@ public class StorageController {
     @Autowired
     private StorageService storageService;
 
-    @GetMapping
-    public Result<Page<Storage>> queryAll(@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize, @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum, @RequestParam(value = "storageName", required = false, defaultValue = "") String storageName) {
+    @GetMapping("/list")
+    public Result<List<Storage>> queryAll() {
+        List<Storage> storages = storageService.queryAll();
+        if (storages == null) {
+            return Result.fail(null);
+        }
+        return Result.success(storages);
+    }
 
-        Page<Storage> storagePage = storageService.queryAll(pageSize, pageNum, storageName);
+    @GetMapping
+    public Result<Page<Storage>> queryByPage(@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize, @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum, @RequestParam(value = "storageName", required = false, defaultValue = "") String storageName) {
+
+        Page<Storage> storagePage = storageService.queryByPage(pageSize, pageNum, storageName);
         return Result.success(storagePage);
     }
 

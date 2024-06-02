@@ -22,6 +22,10 @@
         where storage_name = #{storageName}
     </select>
 
+    <select id="selectAll" resultMap="baseMap">
+        <include refid="baseSql"></include>
+    </select>
+
     <insert id="insert">
         insert into storage(storage_name
         <if test="storageRemark != null">,storage_remark</if>)

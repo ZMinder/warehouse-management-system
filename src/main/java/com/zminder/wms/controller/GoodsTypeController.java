@@ -1,12 +1,15 @@
 package com.zminder.wms.controller;
 
 import com.zminder.wms.pojo.GoodsType;
+import com.zminder.wms.pojo.Menu;
 import com.zminder.wms.service.GoodsTypeService;
 import com.zminder.wms.utils.Page;
 import com.zminder.wms.utils.Result;
 import com.zminder.wms.utils.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/goodsType")
@@ -15,12 +18,21 @@ public class GoodsTypeController {
     @Autowired
     private GoodsTypeService goodsTypeService;
 
+    @GetMapping("/list")
+    public Result<List<GoodsType>> queryAll() {
+        List<GoodsType> goodsTypes = goodsTypeService.queryAll();
+        if (goodsTypes == null) {
+            return Result.fail(null);
+        }
+        return Result.success(goodsTypes);
+    }
+
     @GetMapping
-    public Result<Page<GoodsType>> queryAll(@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+    public Result<Page<GoodsType>> queryByPage(@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                                             @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                             @RequestParam(value = "storageName", required = false, defaultValue = "") String goodsTypeName) {
 
-        Page<GoodsType> storagePage = goodsTypeService.queryAll(pageSize, pageNum, goodsTypeName);
+        Page<GoodsType> storagePage = goodsTypeService.queryByPage(pageSize, pageNum, goodsTypeName);
         return Result.success(storagePage);
     }
 
