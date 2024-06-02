@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zminder.wms.mapper.RecordMapper">
+    <sql id="baseSql">
+        select r.id                                                          record_id,
+               g.goods_name                                                  goods_name,
+               s.storage_name                                                storage_name,
+               gt.goods_type_name                                            goods_type_name,
+               (select u1.nickname from user u1 where u1.id = r.operator_id) operator_nickname,
+               (select u2.nickname from user u2 where u2.id = r.licensor_id) licensor_nickname,
+               r.record_type                                                 record_type,
+               r.goods_count                                                 goods_count,
+               r.operation_time                                              operation_time,
+               r.record_remark                                               record_remark
+        from record r
+                 join goods g on g.id = r.goods_id
+                 join goods_type gt on gt.id = g.goods_type
+                 join storage s on s.id = g.goods_storage
+    </sql>
+
+    <resultMap id="baseMap" type="record">
+        <id column="record_id" property="recordId"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="storage_name" property="storageName"/>
+        <result column="goods_type_name" property="goodsTypeName"/>
+        <result column="operator_nickname" property="operatorNickname"/>
+        <result column="licensor_nickname" property="licensorNickname"/>
+        <result column="record_type" property="recordType"/>
+        <result column="goods_count" property="goodsCount"/>
+        <result column="operation_time" property="operationTime"/>
+        <result column="record_remark" property="recordRemark"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="baseMap">
+        <include refid="baseSql"></include>
+    </select>
+
+    <select id="selectFuzzy" resultMap="baseMap">
+        <include refid="baseSql"></include>
+        <where>
+            <if test="goodsName != null">goods_name like CONCAT('%',#{goodsName},'%')</if>
+            <if test="storageName != null">and storage_name = #{storageName}</if>
+            <if test="goodsTypeName != null">and goods_type_name = #{goodsTypeName}</if>
+            <if test="recordType != null">and record_type = #{recordType}</if>
+        </where>
+    </select>
+</mapper>
