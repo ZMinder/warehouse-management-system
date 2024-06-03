@@ -8,6 +8,8 @@ import java.util.List;
 public interface RecordMapper {
     List<RecordAlias> selectAll();
 
+    List<RecordAlias> selectByOperatorId(int operatorId);
+
     List<RecordAlias> selectFuzzy(RecordAlias recordAlias);
 
     Integer insert(Record record);

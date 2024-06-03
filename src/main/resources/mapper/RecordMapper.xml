@@ -44,6 +44,10 @@
             <if test="recordType != null">and r.record_type = #{recordType}</if>
         </where>
     </select>
+    <select id="selectByOperatorId" resultMap="baseMap">
+        <include refid="baseSql"></include>
+        where r.operator_id = #{operatorId}
+    </select>
 
     <insert id="insert">
         insert into record(goods_id, operator_id, licensor_id,

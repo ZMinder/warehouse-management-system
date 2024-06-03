@@ -8,7 +8,6 @@ import com.zminder.wms.service.RecordService;
 import com.zminder.wms.utils.Page;
 import com.zminder.wms.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -29,6 +28,14 @@ public class RecordController {
     public Result<List<RecordAlias>> queryAll() {
         List<RecordAlias> recordAliases = recordService.queryAll();
         return Result.success(recordAliases);
+    }
+
+    @GetMapping("/{operatorId}")
+    public Result<Page<RecordAlias>> queryByOperatorId(@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+                                                       @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                                                       @PathVariable("operatorId") int operatorId) {
+        Page<RecordAlias> recordAliasPage = recordService.queryByOperatorId(pageSize, pageNum, operatorId);
+        return Result.success(recordAliasPage);
     }
 
     @PostMapping("/fuzzy")

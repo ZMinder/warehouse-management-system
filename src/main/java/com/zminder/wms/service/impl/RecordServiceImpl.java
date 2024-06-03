@@ -27,6 +27,18 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
+    public Page<RecordAlias> queryByOperatorId(int pageSize, int pageNum, int operatorId) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<RecordAlias> recordAliases = recordMapper.selectByOperatorId(operatorId);
+        PageInfo<RecordAlias> recordPageInfo = new PageInfo<>(recordAliases);
+        List<RecordAlias> recordAliasList = recordPageInfo.getList();
+        int realPageSize = recordAliasList.size();
+        int realPageNum = recordPageInfo.getPageNum();
+        long total = recordPageInfo.getTotal();
+        return new Page<>(realPageSize, realPageNum, total, recordAliasList);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Page<RecordAlias> queryFuzzy(int pageSize, int pageNum, RecordAlias recordAlias) {
         PageHelper.startPage(pageNum, pageSize);
