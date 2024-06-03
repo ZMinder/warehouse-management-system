@@ -48,9 +48,9 @@ public class RecordController {
         record.setOperationTime(format);
         //对goods表进行出库或入库操作
         Goods goods = goodsService.queryById(record.getGoodsId());
-        if (record.getRecordType() == "入库") {
+        if (record.getRecordType().equals("入库")) {
             goods.setGoodsCount(goods.getGoodsCount() + record.getGoodsCount());
-        } else if (record.getRecordType() == "出库") {
+        } else if (record.getRecordType().equals("出库")) {
             goods.setGoodsCount(goods.getGoodsCount() - record.getGoodsCount());
         }
         //执行入库或出库操作
