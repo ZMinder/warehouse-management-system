@@ -29,7 +29,8 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<RecordAlias> queryFuzzy(int pageSize, int pageNum, RecordAlias recordAlias, int operatorId) {
+    public Page<RecordAlias> queryFuzzy(int pageSize, int pageNum,
+                                        RecordAlias recordAlias, Integer operatorId) {
         PageHelper.startPage(pageNum, pageSize);
         HashMap<String, Object> map = new HashMap<>();
         map.put("recordAlias", recordAlias);

@@ -33,9 +33,15 @@ public class RecordController {
     @PostMapping("/fuzzy")
     public Result<Page<RecordAlias>> queryFuzzy(@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                                                 @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
-                                                @RequestParam(value = "operatorId", required = false, defaultValue = "null") int operatorId,
+                                                @RequestParam(value = "operatorId", required = false, defaultValue = "null") String operatorId,
                                                 @RequestBody RecordAlias recordAlias) {
-        Page<RecordAlias> recordPage = recordService.queryFuzzy(pageSize, pageNum, recordAlias,operatorId);
+        Integer operator = null;
+        System.out.println(operatorId);
+        if (!"null".equals(operatorId)) {
+            System.out.println("~!!!!");
+            operator = Integer.parseInt(operatorId);
+        }
+        Page<RecordAlias> recordPage = recordService.queryFuzzy(pageSize, pageNum, recordAlias, operator);
         return Result.success(recordPage);
     }
 

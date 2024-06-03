@@ -9,7 +9,7 @@ import java.util.List;
 public interface RecordService {
     List<RecordAlias> queryAll();
 
-    Page<RecordAlias> queryFuzzy(int pageSize, int pageNum, RecordAlias recordAlias,int operatorId);
+    Page<RecordAlias> queryFuzzy(int pageSize, int pageNum, RecordAlias recordAlias,Integer operatorId);
 
     Integer save(Record record);
 }
