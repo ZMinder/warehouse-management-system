@@ -44,4 +44,13 @@
             <if test="recordType != null">and r.record_type = #{recordType}</if>
         </where>
     </select>
+
+    <insert id="insert">
+        insert into record(goods_id, operator_id, licensor_id,
+                           record_type, goods_count, operation_time,
+                           record_remark)
+        values (#{goodsId}, #{operatorId}, #{licensorId},
+                #{recordType}, #{goodsCount}, #{operationTime},
+                #{recordRemark})
+    </insert>
 </mapper>

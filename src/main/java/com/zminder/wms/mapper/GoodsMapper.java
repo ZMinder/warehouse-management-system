@@ -19,6 +19,8 @@ public interface GoodsMapper {
 
     Goods selectByGoodsNameAndStorageAndType(Map map);
 
+    Goods selectById(Integer id);
+
     int deleteById(Integer id);
 
     int insert(Goods goods);

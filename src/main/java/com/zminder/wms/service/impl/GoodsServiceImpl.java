@@ -41,11 +41,17 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     @Transactional(readOnly = true)
     public Goods queryByGoodsNameAndStorageAndType(String goodsName, Integer storageId, Integer typeId) {
-        HashMap<String ,Object> map = new HashMap<>();
-        map.put("goodsName",goodsName);
-        map.put("goodsStorage",storageId);
-        map.put("goodsType",typeId);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("goodsName", goodsName);
+        map.put("goodsStorage", storageId);
+        map.put("goodsType", typeId);
         return goodsMapper.selectByGoodsNameAndStorageAndType(map);
+    }
+
+    @Override
+    public Goods queryById(Integer id) {
+        Goods goods = goodsMapper.selectById(id);
+        return goods;
     }
 
     @Override

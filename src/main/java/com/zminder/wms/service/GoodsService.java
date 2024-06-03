@@ -12,6 +12,8 @@ public interface GoodsService {
 
     Goods queryByGoodsNameAndStorageAndType(String goodsName, Integer storageId, Integer typeId);
 
+    Goods queryById(Integer id);
+
     int save(Goods goods);
 
     int removeById(Integer id);

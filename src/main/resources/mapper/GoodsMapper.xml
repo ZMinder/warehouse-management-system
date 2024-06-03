@@ -43,6 +43,10 @@
         and goods_storage = #{goodsStorage}
         and goods_type = #{goodsType}
     </select>
+    <select id="selectById" resultMap="baseMap">
+        <include refid="baseSql"></include>
+        where id = #{id}
+    </select>
 
     <delete id="deleteById">
         delete

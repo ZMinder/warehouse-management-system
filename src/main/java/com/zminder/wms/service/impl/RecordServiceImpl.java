@@ -3,6 +3,7 @@ package com.zminder.wms.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zminder.wms.mapper.RecordMapper;
+import com.zminder.wms.pojo.Record;
 import com.zminder.wms.pojo.RecordAlias;
 import com.zminder.wms.service.RecordService;
 import com.zminder.wms.utils.Page;
@@ -36,5 +37,10 @@ public class RecordServiceImpl implements RecordService {
         int realPageNum = recordPageInfo.getPageNum();
         long total = recordPageInfo.getTotal();
         return new Page<>(realPageSize, realPageNum, total, recordAliasList);
+    }
+
+    @Override
+    public Integer save(Record record) {
+        return recordMapper.insert(record);
     }
 }
