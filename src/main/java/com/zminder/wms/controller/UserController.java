@@ -89,7 +89,6 @@ public class UserController {
     public Result<Page<User>> fuzzyQuery(@RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize,
                                          @RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
                                          @RequestBody User fuzzy) {
-        System.out.println(fuzzy);
         Page<User> page = userService.fuzzyQuery(pageSize, pageNum, fuzzy);
         return Result.success(page);
     }
