@@ -30,19 +30,12 @@ public class RecordController {
         return Result.success(recordAliases);
     }
 
-    @GetMapping("/{operatorId}")
-    public Result<Page<RecordAlias>> queryByOperatorId(@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
-                                                       @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
-                                                       @PathVariable("operatorId") int operatorId) {
-        Page<RecordAlias> recordAliasPage = recordService.queryByOperatorId(pageSize, pageNum, operatorId);
-        return Result.success(recordAliasPage);
-    }
-
     @PostMapping("/fuzzy")
     public Result<Page<RecordAlias>> queryFuzzy(@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                                                 @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                                                @RequestParam(value = "operatorId", required = false, defaultValue = "null") int operatorId,
                                                 @RequestBody RecordAlias recordAlias) {
-        Page<RecordAlias> recordPage = recordService.queryFuzzy(pageSize, pageNum, recordAlias);
+        Page<RecordAlias> recordPage = recordService.queryFuzzy(pageSize, pageNum, recordAlias,operatorId);
         return Result.success(recordPage);
     }
 

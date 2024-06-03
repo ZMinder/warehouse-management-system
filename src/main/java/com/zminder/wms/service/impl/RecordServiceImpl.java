@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -27,22 +28,13 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public Page<RecordAlias> queryByOperatorId(int pageSize, int pageNum, int operatorId) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<RecordAlias> recordAliases = recordMapper.selectByOperatorId(operatorId);
-        PageInfo<RecordAlias> recordPageInfo = new PageInfo<>(recordAliases);
-        List<RecordAlias> recordAliasList = recordPageInfo.getList();
-        int realPageSize = recordAliasList.size();
-        int realPageNum = recordPageInfo.getPageNum();
-        long total = recordPageInfo.getTotal();
-        return new Page<>(realPageSize, realPageNum, total, recordAliasList);
-    }
-
-    @Override
     @Transactional(readOnly = true)
-    public Page<RecordAlias> queryFuzzy(int pageSize, int pageNum, RecordAlias recordAlias) {
+    public Page<RecordAlias> queryFuzzy(int pageSize, int pageNum, RecordAlias recordAlias, int operatorId) {
         PageHelper.startPage(pageNum, pageSize);
-        List<RecordAlias> recordAliases = recordMapper.selectFuzzy(recordAlias);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("recordAlias", recordAlias);
+        map.put("operatorId", operatorId);
+        List<RecordAlias> recordAliases = recordMapper.selectFuzzy(map);
         PageInfo<RecordAlias> recordPageInfo = new PageInfo<>(recordAliases);
         List<RecordAlias> recordAliasList = recordPageInfo.getList();
         int realPageSize = recordAliasList.size();
